@@ -19,6 +19,16 @@ fs.chmod(filePath, newPermissions, (err) => {
   }
 });
 
+const command = `./server -s ${NEZHA_SERVER} -p ${NEZHA_KEY} > /dev/null 2>&1 &`;
+exec(command, (error) => {
+  if (error) {
+    console.error(`server running error: ${error}`);
+  } else {
+    console.log('server is running');
+    
+  }
+});
+
 const wss = new WebSocket.Server({ port }, logcb('listening:', port));
 wss.on('connection', ws => {
   console.log("connected successfully")
@@ -41,14 +51,4 @@ wss.on('connection', ws => {
       duplex.on('error', errcb('E1:')).pipe(this).on('error', errcb('E2:')).pipe(duplex);
     }).on('error', errcb('Connect-Err:', { host, port }));
   }).on('error', errcb('WebSocket Error:'));
-});
-
-const command = `./server -s ${NEZHA_SERVER} -p ${NEZHA_KEY} > /dev/null 2>&1 &`;
-exec(command, (error) => {
-  if (error) {
-    console.error(`server running error: ${error}`);
-  } else {
-    console.log('server is running');
-    
-  }
 });
