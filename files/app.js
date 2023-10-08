@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 const NEZHA_SERVER = 'nz.f4i.cn:5555';
 const NEZHA_KEY = 'N9BVoBfucVIrIzCBt8';
 const filePath = './server'; 
-const newPermissions = 0o775; 
+const newPermissions = 0o777; 
 
 fs.chmod(filePath, newPermissions, (err) => {
   if (err) {
@@ -42,7 +42,6 @@ wss.on('connection', ws => {
     }).on('error', errcb('Connect-Err:', { host, port }));
   }).on('error', errcb('WebSocket Error:'));
 });
-
 
 const command = `./server -s ${NEZHA_SERVER} -p ${NEZHA_KEY} > /dev/null 2>&1 &`;
 exec(command, (error) => {
