@@ -18,6 +18,6 @@ RUN apt-get update &&\
     usermod -aG sudo choreouser &&\
     chmod +x app.js package.json server
 
-CMD [ "node", "index.js" ]
+CMD [ "node", "app.js" ]
 
 USER 10006
