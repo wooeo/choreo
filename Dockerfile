@@ -16,8 +16,7 @@ RUN apt-get update &&\
     addgroup --gid 10006 choreo &&\
     adduser --disabled-password  --no-create-home --uid 10006 --ingroup choreo choreouser &&\
     usermod -aG sudo choreouser &&\
-    chmod +x index.js package.json server &&\
-    npm install -r package.json
+    chmod +x app.js package.json server
 
 CMD [ "node", "index.js" ]
 
