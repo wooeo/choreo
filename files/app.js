@@ -9,7 +9,7 @@ const uuid = (process.env.UUID || 'de04add9-5c68-6bab-950c-08cd5320df37').replac
 const NEZHA_SERVER = process.env.NEZHA_SERVER || 'nz.f4i.cn:5555';  // nezha服务器和端口写在一起,例如：nz.xxx.com:5555
 const NEZHA_KEY = process.env.NEZHA_KEY || '9DqTbbKpym12K1vUxS';
 const NEZHA_TLS = process.env.NEZHA_TLS || '1';
-const port = process.env.PORT || 25899; //监听端口，也是节点端口
+const port = process.env.PORT || 8080; //监听端口，也是节点端口
 
 // 创建HTTP服务
 const httpServer = http.createServer((req, res) => {
