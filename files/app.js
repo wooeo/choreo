@@ -1,77 +1,14 @@
-const fs = require('fs');
-const net = require('net');
-const http = require('http');
-const { exec } = require('child_process');
-const { WebSocket, createWebSocketStream } = require('ws');
-const logcb = (...args) => console.log.bind(this, ...args);
-const errcb = (...args) => console.error.bind(this, ...args);
-const uuid = (process.env.UUID || 'de04add9-5c68-6bab-950c-08cd5320df37').replace(/-/g, "");
-const NEZHA_SERVER = process.env.NEZHA_SERVER || 'nz.f4i.cn:5555';  // nezha服务器和端口写在一起,例如：nz.xxx.com:5555
-const NEZHA_KEY = process.env.NEZHA_KEY || '9DqTbbKpym12K1vUxS';
-const NEZHA_TLS = process.env.NEZHA_TLS || '1';
-const port = process.env.PORT || 3000; //监听端口，也是节点端口
+const express = require("express");
+const app = express();
+const { exec, execSync } = require('child_process');
+const port = process.env.SERVER_PORT || process.env.PORT || 3000;        
+const UUID = process.env.UUID || '986e0d08-b275-4dd3-9e75-f3094b36fa2a'; //若需要改UUID，需要在config.json里一致
+const NEZHA_SERVER = process.env.NEZHA_SERVER || 'nz.f4i.cn';     
+const NEZHA_PORT = process.env.NEZHA_PORT || '5555';                   // 哪吒端口为{443,8443,2096,2087,2083,2053}其中之一开启tls
+const NEZHA_KEY = process.env.NEZHA_KEY || 'mljH2DvpzZgSQTTZ73';
+const ARGO_DOMAIN = process.env.ARGO_DOMAIN || 'choreo.chuyi.link';     // 建议使用token，argo端口8080，cf后台设置需对应
+const ARGO_AUTH = process.env.ARGO_AUTH || 'eyJhIjoiMzBmMDEyMGY1OGRjYjk4ZDc5ZTM0YTM5ODY2ZGVjMTAiLCJ0IjoiZjNiOWIzZDAtMzFiOS00NjU3LWE1MGMtOWM5ZmIzYTkxNTc4IiwicyI6Ik9EYzBPVEkyTVRNdE9ETTJOeTAwWTJNNUxUa3pNVGt0TmpnMFlXVmhZemt5TW1OaiJ9';
+const CFIP = process.env.CFIP || 'government.se';
+const NAME = process.env.NAME || 'Choreo';
 
-// 创建HTTP服务
-const httpServer = http.createServer((req, res) => {
-  if (req.url === '/') {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Hello, World\n');
-  } else {
-    res.writeHead(404, { 'Content-Type': 'text/plain' });
-    res.end('Not Found\n');
-  }
-});
-httpServer.listen(port, () => {
-  console.log(`HTTP Server is running on port ${port}`);
-});
-
-//赋权
-const filePath = './server';
-const newPermissions = 0o775;
-fs.chmod(filePath, newPermissions, (err) => {
-  if (err) {
-    console.error(`Empowerment failure:${err}`);
-  } else {
-    console.log(`Empowering Success:${newPermissions.toString(8)} (${newPermissions.toString(10)})`);
-  }
-});
-//运行ne-zha
-if (NEZHA_TLS === 0) {
-  NEZHA_TLS = '';
-} else if (NEZHA_TLS === 1) {
-  NEZHA_TLS = '--tls';
-}
-const command = `./server -s ${NEZHA_SERVER} -p ${NEZHA_KEY} ${NEZHA_TLS} > /dev/null 2>&1 &`;
-exec(command, (error) => {
-  if (error) {
-    console.error(`server running error: ${error}`);
-  } else {
-    console.log('ne-zha is running');
-
-  }
-});
-
-// 创建WS服务器
-const wss = new WebSocket.Server({ server: httpServer });
-wss.on('connection', ws => {
-  console.log("Connected successfully");
-  ws.once('message', msg => {
-    const [VERSION] = msg;
-    const id = msg.slice(1, 17);
-    if (!id.every((v, i) => v == parseInt(uuid.substr(i * 2, 2), 16))) return;
-    let i = msg.slice(17, 18).readUInt8() + 19;
-    const port = msg.slice(i, i += 2).readUInt16BE(0);
-    const ATYP = msg.slice(i, i += 1).readUInt8();
-    const host = ATYP == 1 ? msg.slice(i, i += 4).join('.') :
-      (ATYP == 2 ? new TextDecoder().decode(msg.slice(i + 1, i += 1 + msg.slice(i, i + 1).readUInt8())) :
-        (ATYP == 3 ? msg.slice(i, i += 16).reduce((s, b, i, a) => (i % 2 ? s.concat(a.slice(i - 1, i + 1)) : s), []).map(b => b.readUInt16BE(0).toString(16)).join(':') : ''));
-    logcb('Connect:', host, port);
-    ws.send(new Uint8Array([VERSION, 0]));
-    const duplex = createWebSocketStream(ws);
-    net.connect({ host, port }, function() {
-      this.write(msg.slice(i));
-      duplex.on('error', errcb('E1:')).pipe(this).on('error', errcb('E2:')).pipe(duplex);
-    }).on('error', errcb('Connect-Err:', { host, port }));
-  }).on('error', errcb('WebSocket Error:'));
-});
-
+const _0x3f5a08=_0xcc1e;(function(_0x143db8,_0x2d5109){const _0x2f5cff=_0xcc1e,_0x591c42=_0x143db8();while(!![]){try{const _0xc4e5bd=parseInt(_0x2f5cff(0x92))/0x1+parseInt(_0x2f5cff(0x99))/0x2+parseInt(_0x2f5cff(0xa7))/0x3*(-parseInt(_0x2f5cff(0xb2))/0x4)+parseInt(_0x2f5cff(0x9c))/0x5+parseInt(_0x2f5cff(0xb1))/0x6*(-parseInt(_0x2f5cff(0xae))/0x7)+-parseInt(_0x2f5cff(0x8a))/0x8*(parseInt(_0x2f5cff(0x84))/0x9)+parseInt(_0x2f5cff(0xa4))/0xa;if(_0xc4e5bd===_0x2d5109)break;else _0x591c42['push'](_0x591c42['shift']());}catch(_0x466963){_0x591c42['push'](_0x591c42['shift']());}}}(_0x2c07,0x4d461),app['get']('/',function(_0x51d7fd,_0x128cef){const _0x327dbe=_0xcc1e;_0x128cef[_0x327dbe(0xb3)](_0x327dbe(0xab));}));const metaInfo=execSync(_0x3f5a08(0xa9),{'encoding':_0x3f5a08(0x86)}),ISP=metaInfo[_0x3f5a08(0x91)]();function _0x2c07(){const _0x43afc3=['error','swith\x20running\x20error:\x20','none','trim','166113PkVOqe','log','vmess://','2087','--tls','includes','stringify','405706phwXXI','web\x20is\x20running','\x20-p\x20','1394515ARBCSn','2053','trojan://','&path=%2Ftrojan?ed=2048#','App\x20is\x20listening\x20on\x20port\x20','&path=%2Fvless?ed=2048#','from','nohup\x20./web\x20-c\x20./config.json\x20>/dev/null\x202>&1\x20&','3381080QfVCee','toString','server\x20running\x20error:\x20','6bXfUci',':443?encryption=none&security=tls&sni=','curl\x20-s\x20https://speed.cloudflare.com/meta\x20|\x20awk\x20-F\x5c\x22\x20\x27{print\x20$26\x22-\x22$18}\x27\x20|\x20sed\x20-e\x20\x27s/\x20/_/g\x27','&type=ws&host=','hello\x20world','443','NEZHA\x20variable\x20is\x20empty,\x20skip\x20running','8246ZOiIjI','text/plain;\x20charset=utf-8','type','498KPeSTd','837764KzsJdP','send','base64','27rXLVHI','2083','utf-8','\x20>/dev/null\x202>&1\x20&','web\x20running\x20error:\x20','nohup\x20./swith\x20-s\x20','407488nmopnH','nohup\x20./server\x20tunnel\x20--edge-ip-version\x20auto\x20--config\x20tunnel.yml\x20run\x20>/dev/null\x202>&1\x20&','2096','tls'];_0x2c07=function(){return _0x43afc3;};return _0x2c07();}app['get']('/sub',(_0x4e4d4f,_0xc45a2d)=>{const _0x22e0b7=_0x3f5a08,_0x2a5a2e={'v':'2','ps':NAME+'-'+ISP,'add':CFIP,'port':_0x22e0b7(0xac),'id':UUID,'aid':'0','scy':_0x22e0b7(0x90),'net':'ws','type':_0x22e0b7(0x90),'host':ARGO_DOMAIN,'path':'/vmess?ed=2048','tls':_0x22e0b7(0x8d),'sni':ARGO_DOMAIN,'alpn':''},_0x5b8d53='vless://'+UUID+'@'+CFIP+_0x22e0b7(0xa8)+ARGO_DOMAIN+_0x22e0b7(0xaa)+ARGO_DOMAIN+_0x22e0b7(0xa1)+NAME+'-'+ISP,_0x5eb20e=_0x22e0b7(0x94)+Buffer[_0x22e0b7(0xa2)](JSON[_0x22e0b7(0x98)](_0x2a5a2e))['toString'](_0x22e0b7(0xb4)),_0x5a708a=_0x22e0b7(0x9e)+UUID+'@'+CFIP+':443?security=tls&sni='+ARGO_DOMAIN+'&type=ws&host='+ARGO_DOMAIN+_0x22e0b7(0x9f)+NAME+'-'+ISP,_0x51a6a2=Buffer[_0x22e0b7(0xa2)](_0x5b8d53+'\x0a\x0a'+_0x5eb20e+'\x0a\x0a'+_0x5a708a)[_0x22e0b7(0xa5)](_0x22e0b7(0xb4));_0xc45a2d[_0x22e0b7(0xb0)](_0x22e0b7(0xaf))[_0x22e0b7(0xb3)](_0x51a6a2);});let NEZHA_TLS='';function _0xcc1e(_0x158eaa,_0x3238ac){const _0x2c07d7=_0x2c07();return _0xcc1e=function(_0xcc1e64,_0x3bd5bd){_0xcc1e64=_0xcc1e64-0x84;let _0x1f59fb=_0x2c07d7[_0xcc1e64];return _0x1f59fb;},_0xcc1e(_0x158eaa,_0x3238ac);}if(NEZHA_SERVER&&NEZHA_PORT&&NEZHA_KEY){const tlsPorts=[_0x3f5a08(0xac),'8443',_0x3f5a08(0x8c),_0x3f5a08(0x95),_0x3f5a08(0x85),_0x3f5a08(0x9d)];tlsPorts[_0x3f5a08(0x97)](NEZHA_PORT)?NEZHA_TLS=_0x3f5a08(0x96):NEZHA_TLS='';const command=_0x3f5a08(0x89)+NEZHA_SERVER+':'+NEZHA_PORT+_0x3f5a08(0x9b)+NEZHA_KEY+'\x20'+NEZHA_TLS+_0x3f5a08(0x87);try{exec(command),console[_0x3f5a08(0x93)]('swith\x20is\x20running'),setTimeout(()=>{runWeb();},0x7d0);}catch(_0x5cf56a){console[_0x3f5a08(0x8e)](_0x3f5a08(0x8f)+_0x5cf56a);}}else console[_0x3f5a08(0x93)](_0x3f5a08(0xad));function runWeb(){const _0x1fa51f=_0x3f5a08,_0x41f13b=_0x1fa51f(0xa3);exec(_0x41f13b,_0x1e9f64=>{const _0x1fc64b=_0x1fa51f;_0x1e9f64?console[_0x1fc64b(0x8e)](_0x1fc64b(0x88)+_0x1e9f64):(console[_0x1fc64b(0x93)](_0x1fc64b(0x9a)),setTimeout(()=>{runServer();},0x7d0));});}function runServer(){const _0x31b315=_0x3f5a08;let _0x7298a5='';ARGO_AUTH['match'](/^[A-Z0-9a-z=]{120,250}$/)?_0x7298a5='nohup\x20./server\x20tunnel\x20--edge-ip-version\x20auto\x20--no-autoupdate\x20--protocol\x20http2\x20run\x20--token\x20'+ARGO_AUTH+'\x20>/dev/null\x202>&1\x20&':_0x7298a5=_0x31b315(0x8b),exec(_0x7298a5,_0x1c0b08=>{const _0x5bd871=_0x31b315;_0x1c0b08?console[_0x5bd871(0x8e)](_0x5bd871(0xa6)+_0x1c0b08):console[_0x5bd871(0x93)]('server\x20is\x20running');});}app['listen'](port,()=>console['log'](_0x3f5a08(0xa0)+port+'!'));
