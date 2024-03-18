@@ -55,7 +55,7 @@
                 "decryption":"none"
             },
             "streamSettings":{
-                "network":"ws",
+                "network":"tcp",
                 "security":"none"
             }
         },
@@ -73,7 +73,7 @@
                 "decryption":"none"
             },
             "streamSettings":{
-                "network":"ws",
+                "network":"tcp",
                 "security":"none",
                 "wsSettings":{
                     "path":"/vless"
@@ -102,7 +102,7 @@
                 ]
             },
             "streamSettings":{
-                "network":"ws",
+                "network":"tcp",
                 "wsSettings":{
                     "path":"/vmess"
                 }
@@ -129,7 +129,7 @@
                 ]
             },
             "streamSettings":{
-                "network":"ws",
+                "network":"tcp",
                 "security":"none",
                 "wsSettings":{
                     "path":"/trojan"
@@ -159,7 +159,7 @@
                 "decryption":"none"
             },
             "streamSettings":{
-                "network":"ws",
+                "network":"tcp",
                 "wsSettings":{
                     "path":"/shadowsocks"
                 }
