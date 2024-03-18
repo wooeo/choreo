@@ -4,10 +4,10 @@ const { exec, execSync } = require('child_process');
 const PORT = process.env.SERVER_PORT || process.env.PORT || 3000;        
 const UUID = process.env.UUID || 'ed93aed7-4bba-40c8-99e3-9682d75697d1'; //若需要改UUID，需要在config.json里改为一致
 const NEZHA_SERVER = process.env.NEZHA_SERVER || 'nz.f4i.cn';     
-const NEZHA_PORT = process.env.NEZHA_PORT || '5555';                     // 哪吒端口为{443,8443,2096,2087,2083,2053}其中之一开启tls
+const NEZHA_PORT = process.env.NEZHA_PORT || '5555';                     
 const NEZHA_KEY = process.env.NEZHA_KEY || 'N9BVoBfucVIrIzCBt8';
-const ARGO_DOMAIN = process.env.ARGO_DOMAIN || 'choreo.chuyi.link';      // 建议使用token，argo端口8080，cf后台设置需对应
-const ARGO_AUTH = process.env.ARGO_AUTH || 'eyJhIjoiMzBmMDEyMGY1OGRjYjk4ZDc5ZTM0YTM5ODY2ZGVjMTAiLCJ0IjoiZjNiOWIzZDAtMzFiOS00NjU3LWE1MGMtOWM5ZmIzYTkxNTc4IiwicyI6Ik9EYzBPVEkyTVRNdE9ETTJOeTAwWTJNNUxUa3pNVGt0TmpnMFlXVmhZemt5TW1OaiJ9';
+const ARGO_DOMAIN = process.env.ARGO_DOMAIN || 'chus.vee.gay';      
+const ARGO_AUTH = process.env.ARGO_AUTH || 'eyJhIjoiMzBmMDEyMGY1OGRjYjk4ZDc5ZTM0YTM5ODY2ZGVjMTAiLCJ0IjoiZThkODRiY2QtZTFjZS00Y2QyLWE2M2UtZWJlZjg2NjNjNjJmIiwicyI6Ik5HWTVNRFJoTVRZdE9XTTVOaTAwTVRBMkxXRTBPREl0WWpWaU16QXdNRFJoWXpWbSJ9';
 const CFIP = process.env.CFIP || 'na.ma';
 const NAME = process.env.NAME || 'Choreo';
 
