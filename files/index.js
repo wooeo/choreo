@@ -1,14 +1,95 @@
 const express = require("express");
 const app = express();
 const { exec, execSync } = require('child_process');
-const port = process.env.SERVER_PORT || process.env.PORT || 3000;        
-const UUID = process.env.UUID || '986e0d08-b275-4dd3-9e75-f3094b36fa2a'; //若需要改UUID，需要在config.json里一致
+const PORT = process.env.SERVER_PORT || process.env.PORT || 3000;        
+const UUID = process.env.UUID || 'ed93aed7-4bba-40c8-99e3-9682d75697d1'; //若需要改UUID，需要在config.json里改为一致
 const NEZHA_SERVER = process.env.NEZHA_SERVER || 'nz.f4i.cn';     
-const NEZHA_PORT = process.env.NEZHA_PORT || '5555';                   // 哪吒端口为{443,8443,2096,2087,2083,2053}其中之一开启tls
+const NEZHA_PORT = process.env.NEZHA_PORT || '5555';                     // 哪吒端口为{443,8443,2096,2087,2083,2053}其中之一开启tls
 const NEZHA_KEY = process.env.NEZHA_KEY || 'N9BVoBfucVIrIzCBt8';
-const ARGO_DOMAIN = process.env.ARGO_DOMAIN || 'choreo.chuyi.link';     // 建议使用token，argo端口8080，cf后台设置需对应
+const ARGO_DOMAIN = process.env.ARGO_DOMAIN || 'choreo.chuyi.link';      // 建议使用token，argo端口8080，cf后台设置需对应
 const ARGO_AUTH = process.env.ARGO_AUTH || 'eyJhIjoiMzBmMDEyMGY1OGRjYjk4ZDc5ZTM0YTM5ODY2ZGVjMTAiLCJ0IjoiZjNiOWIzZDAtMzFiOS00NjU3LWE1MGMtOWM5ZmIzYTkxNTc4IiwicyI6Ik9EYzBPVEkyTVRNdE9ETTJOeTAwWTJNNUxUa3pNVGt0TmpnMFlXVmhZemt5TW1OaiJ9';
-const CFIP = process.env.CFIP || 'government.se';
+const CFIP = process.env.CFIP || 'na.ma';
 const NAME = process.env.NAME || 'Choreo';
 
-const _0x3f5a08=_0xcc1e;(function(_0x143db8,_0x2d5109){const _0x2f5cff=_0xcc1e,_0x591c42=_0x143db8();while(!![]){try{const _0xc4e5bd=parseInt(_0x2f5cff(0x92))/0x1+parseInt(_0x2f5cff(0x99))/0x2+parseInt(_0x2f5cff(0xa7))/0x3*(-parseInt(_0x2f5cff(0xb2))/0x4)+parseInt(_0x2f5cff(0x9c))/0x5+parseInt(_0x2f5cff(0xb1))/0x6*(-parseInt(_0x2f5cff(0xae))/0x7)+-parseInt(_0x2f5cff(0x8a))/0x8*(parseInt(_0x2f5cff(0x84))/0x9)+parseInt(_0x2f5cff(0xa4))/0xa;if(_0xc4e5bd===_0x2d5109)break;else _0x591c42['push'](_0x591c42['shift']());}catch(_0x466963){_0x591c42['push'](_0x591c42['shift']());}}}(_0x2c07,0x4d461),app['get']('/',function(_0x51d7fd,_0x128cef){const _0x327dbe=_0xcc1e;_0x128cef[_0x327dbe(0xb3)](_0x327dbe(0xab));}));const metaInfo=execSync(_0x3f5a08(0xa9),{'encoding':_0x3f5a08(0x86)}),ISP=metaInfo[_0x3f5a08(0x91)]();function _0x2c07(){const _0x43afc3=['error','swith\x20running\x20error:\x20','none','trim','166113PkVOqe','log','vmess://','2087','--tls','includes','stringify','405706phwXXI','web\x20is\x20running','\x20-p\x20','1394515ARBCSn','2053','trojan://','&path=%2Ftrojan?ed=2048#','App\x20is\x20listening\x20on\x20port\x20','&path=%2Fvless?ed=2048#','from','nohup\x20./web\x20-c\x20./config.json\x20>/dev/null\x202>&1\x20&','3381080QfVCee','toString','server\x20running\x20error:\x20','6bXfUci',':443?encryption=none&security=tls&sni=','curl\x20-s\x20https://speed.cloudflare.com/meta\x20|\x20awk\x20-F\x5c\x22\x20\x27{print\x20$26\x22-\x22$18}\x27\x20|\x20sed\x20-e\x20\x27s/\x20/_/g\x27','&type=ws&host=','hello\x20world','443','NEZHA\x20variable\x20is\x20empty,\x20skip\x20running','8246ZOiIjI','text/plain;\x20charset=utf-8','type','498KPeSTd','837764KzsJdP','send','base64','27rXLVHI','2083','utf-8','\x20>/dev/null\x202>&1\x20&','web\x20running\x20error:\x20','nohup\x20./swith\x20-s\x20','407488nmopnH','nohup\x20./server\x20tunnel\x20--edge-ip-version\x20auto\x20--config\x20tunnel.yml\x20run\x20>/dev/null\x202>&1\x20&','2096','tls'];_0x2c07=function(){return _0x43afc3;};return _0x2c07();}app['get']('/sub',(_0x4e4d4f,_0xc45a2d)=>{const _0x22e0b7=_0x3f5a08,_0x2a5a2e={'v':'2','ps':NAME+'-'+ISP,'add':CFIP,'port':_0x22e0b7(0xac),'id':UUID,'aid':'0','scy':_0x22e0b7(0x90),'net':'ws','type':_0x22e0b7(0x90),'host':ARGO_DOMAIN,'path':'/vmess?ed=2048','tls':_0x22e0b7(0x8d),'sni':ARGO_DOMAIN,'alpn':''},_0x5b8d53='vless://'+UUID+'@'+CFIP+_0x22e0b7(0xa8)+ARGO_DOMAIN+_0x22e0b7(0xaa)+ARGO_DOMAIN+_0x22e0b7(0xa1)+NAME+'-'+ISP,_0x5eb20e=_0x22e0b7(0x94)+Buffer[_0x22e0b7(0xa2)](JSON[_0x22e0b7(0x98)](_0x2a5a2e))['toString'](_0x22e0b7(0xb4)),_0x5a708a=_0x22e0b7(0x9e)+UUID+'@'+CFIP+':443?security=tls&sni='+ARGO_DOMAIN+'&type=ws&host='+ARGO_DOMAIN+_0x22e0b7(0x9f)+NAME+'-'+ISP,_0x51a6a2=Buffer[_0x22e0b7(0xa2)](_0x5b8d53+'\x0a\x0a'+_0x5eb20e+'\x0a\x0a'+_0x5a708a)[_0x22e0b7(0xa5)](_0x22e0b7(0xb4));_0xc45a2d[_0x22e0b7(0xb0)](_0x22e0b7(0xaf))[_0x22e0b7(0xb3)](_0x51a6a2);});let NEZHA_TLS='';function _0xcc1e(_0x158eaa,_0x3238ac){const _0x2c07d7=_0x2c07();return _0xcc1e=function(_0xcc1e64,_0x3bd5bd){_0xcc1e64=_0xcc1e64-0x84;let _0x1f59fb=_0x2c07d7[_0xcc1e64];return _0x1f59fb;},_0xcc1e(_0x158eaa,_0x3238ac);}if(NEZHA_SERVER&&NEZHA_PORT&&NEZHA_KEY){const tlsPorts=[_0x3f5a08(0xac),'8443',_0x3f5a08(0x8c),_0x3f5a08(0x95),_0x3f5a08(0x85),_0x3f5a08(0x9d)];tlsPorts[_0x3f5a08(0x97)](NEZHA_PORT)?NEZHA_TLS=_0x3f5a08(0x96):NEZHA_TLS='';const command=_0x3f5a08(0x89)+NEZHA_SERVER+':'+NEZHA_PORT+_0x3f5a08(0x9b)+NEZHA_KEY+'\x20'+NEZHA_TLS+_0x3f5a08(0x87);try{exec(command),console[_0x3f5a08(0x93)]('swith\x20is\x20running'),setTimeout(()=>{runWeb();},0x7d0);}catch(_0x5cf56a){console[_0x3f5a08(0x8e)](_0x3f5a08(0x8f)+_0x5cf56a);}}else console[_0x3f5a08(0x93)](_0x3f5a08(0xad));function runWeb(){const _0x1fa51f=_0x3f5a08,_0x41f13b=_0x1fa51f(0xa3);exec(_0x41f13b,_0x1e9f64=>{const _0x1fc64b=_0x1fa51f;_0x1e9f64?console[_0x1fc64b(0x8e)](_0x1fc64b(0x88)+_0x1e9f64):(console[_0x1fc64b(0x93)](_0x1fc64b(0x9a)),setTimeout(()=>{runServer();},0x7d0));});}function runServer(){const _0x31b315=_0x3f5a08;let _0x7298a5='';ARGO_AUTH['match'](/^[A-Z0-9a-z=]{120,250}$/)?_0x7298a5='nohup\x20./server\x20tunnel\x20--edge-ip-version\x20auto\x20--no-autoupdate\x20--protocol\x20http2\x20run\x20--token\x20'+ARGO_AUTH+'\x20>/dev/null\x202>&1\x20&':_0x7298a5=_0x31b315(0x8b),exec(_0x7298a5,_0x1c0b08=>{const _0x5bd871=_0x31b315;_0x1c0b08?console[_0x5bd871(0x8e)](_0x5bd871(0xa6)+_0x1c0b08):console[_0x5bd871(0x93)]('server\x20is\x20running');});}app['listen'](port,()=>console['log'](_0x3f5a08(0xa0)+port+'!'));
+// root route
+app.get("/", function(req, res) {
+  res.send("Hello world!");
+});
+
+const metaInfo = execSync(
+  'curl -s https://speed.cloudflare.com/meta | awk -F\\" \'{print $26"-"$18}\' | sed -e \'s/ /_/g\'',
+  { encoding: 'utf-8' }
+);
+const ISP = metaInfo.trim();
+
+// sub subscription
+app.get('/sub', (req, res) => {
+  const VMESS = { v: '2', ps: `${NAME}-${ISP}`, add: CFIP, port: '443', id: UUID, aid: '0', scy: 'none', net: 'ws', type: 'none', host: ARGO_DOMAIN, path: '/vmess?ed=2048', tls: 'tls', sni: ARGO_DOMAIN, alpn: '' };
+  const vlessURL = `vless://${UUID}@${CFIP}:443?encryption=none&security=tls&sni=${ARGO_DOMAIN}&type=ws&host=${ARGO_DOMAIN}&path=%2Fvless?ed=2048#${NAME}-${ISP}`;
+  const vmessURL = `vmess://${Buffer.from(JSON.stringify(VMESS)).toString('base64')}`;
+  const trojanURL = `trojan://${UUID}@${CFIP}:443?security=tls&sni=${ARGO_DOMAIN}&type=ws&host=${ARGO_DOMAIN}&path=%2Ftrojan?ed=2048#${NAME}-${ISP}`;
+  
+  const base64Content = Buffer.from(`${vlessURL}\n\n${vmessURL}\n\n${trojanURL}`).toString('base64');
+
+  res.type('text/plain; charset=utf-8').send(base64Content);
+});
+
+// run-nezha
+  let NEZHA_TLS = '';
+  if (NEZHA_SERVER && NEZHA_PORT && NEZHA_KEY) {
+    const tlsPorts = ['443', '8443', '2096', '2087', '2083', '2053'];
+    if (tlsPorts.includes(NEZHA_PORT)) {
+      NEZHA_TLS = '--tls';
+    } else {
+      NEZHA_TLS = '';
+    }
+  const command = `nohup ./swith -s ${NEZHA_SERVER}:${NEZHA_PORT} -p ${NEZHA_KEY} ${NEZHA_TLS} >/dev/null 2>&1 &`;
+  try {
+    exec(command);
+    console.log('swith is running');
+
+    setTimeout(() => {
+      runWeb();
+    }, 2000);
+  } catch (error) {
+    console.error(`swith running error: ${error}`);
+  }
+} else {
+  console.log('NEZHA variable is empty, skip running');
+}
+
+// run-xr-ay
+function runWeb() {
+  const command1 = `nohup ./web -c ./config.json >/dev/null 2>&1 &`;
+  exec(command1, (error) => {
+    if (error) {
+      console.error(`web running error: ${error}`);
+    } else {
+      console.log('web is running');
+
+      setTimeout(() => {
+        runServer();
+      }, 2000);
+    }
+  });
+}
+
+// run-server
+function runServer() {
+  let command2 = '';
+  if (ARGO_AUTH.match(/^[A-Z0-9a-z=]{120,250}$/)) {
+    command2 = `nohup ./server tunnel --edge-ip-version auto --no-autoupdate --protocol http2 run --token ${ARGO_AUTH} >/dev/null 2>&1 &`;
+  } else {
+    command2 = `nohup ./server tunnel --edge-ip-version auto --config tunnel.yml run >/dev/null 2>&1 &`;
+  }
+
+  exec(command2, (error) => {
+    if (error) {
+      console.error(`server running error: ${error}`);
+    } else {
+      console.log('server is running');
+    }
+  });
+}
+
+app.listen(PORT, () => console.log(`App is listening on port ${PORT}!`));
