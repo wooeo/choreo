@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
     
   schedule:
-    - cron: '0 0 1 * *'
+    - cron: '* */3 * * *'
   workflow_dispatch:
 
 jobs:
@@ -35,5 +35,5 @@ jobs:
           git config --local user.name "${{ github.actor }}"
           git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git pull --rebase
-          git commit --allow-empty -m "a commit per a mouth to keep choreo alive"
+          git commit --allow-empty -m "a commit every 3 hrs to keep choreo alive"
           git push
