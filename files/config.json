@@ -6,7 +6,7 @@
     },
     "inbounds":[
         {
-            "port":8008,
+            "port":8001,
             "protocol":"vless",
             "settings":{
                 "clients":[
