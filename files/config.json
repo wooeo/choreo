@@ -25,16 +25,8 @@
                         "dest":3002
                     },
                     {
-                        "path":"/vmess",
+                        "path":"",
                         "dest":3003
-                    },
-                    {
-                        "path":"/trojan",
-                        "dest":3004
-                    },
-                    {
-                        "path":"/shadowsocks",
-                        "dest":3005
                     }
                 ]
             },
@@ -102,76 +94,12 @@
                 ]
             },
             "streamSettings":{
-                "network":"ws",
-                "wsSettings":{
-                    "path":"/vmess"
+                "network": "splithttp",
+                "security": "none",
+                "httpSettings": {
+                  "host": "",
+                  "path": ""
                 }
-            },
-            "sniffing":{
-                "enabled":true,
-                "destOverride":[
-                    "http",
-                    "tls",
-                    "quic"
-                ],
-                "metadataOnly":false
-            }
-        },
-        {
-            "port":3004,
-            "listen":"127.0.0.1",
-            "protocol":"trojan",
-            "settings":{
-                "clients":[
-                    {
-                        "password":"ed93aed7-4bba-40c8-99e3-9682d75697d1"
-                    }
-                ]
-            },
-            "streamSettings":{
-                "network":"ws",
-                "security":"none",
-                "wsSettings":{
-                    "path":"/trojan"
-                }
-            },
-            "sniffing":{
-                "enabled":true,
-                "destOverride":[
-                    "http",
-                    "tls",
-                    "quic"
-                ],
-                "metadataOnly":false
-            }
-        },
-        {
-            "port":3005,
-            "listen":"127.0.0.1",
-            "protocol":"shadowsocks",
-            "settings":{
-                "clients":[
-                    {
-                        "method":"chacha20-ietf-poly1305",
-                        "password":"ed93aed7-4bba-40c8-99e3-9682d75697d1"
-                    }
-                ],
-                "decryption":"none"
-            },
-            "streamSettings":{
-                "network":"ws",
-                "wsSettings":{
-                    "path":"/shadowsocks"
-                }
-            },
-            "sniffing":{
-                "enabled":true,
-                "destOverride":[
-                    "http",
-                    "tls",
-                    "quic"
-                ],
-                "metadataOnly":false
             }
         }
     ],
