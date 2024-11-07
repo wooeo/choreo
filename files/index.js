@@ -6,8 +6,8 @@ const UUID = process.env.UUID || 'ed93aed7-4bba-40c8-99e3-9682d75697d1'; //è‹¥éœ
 const NEZHA_SERVER = process.env.NEZHA_SERVER || 'nz.f4i.cn';     
 const NEZHA_PORT = process.env.NEZHA_PORT || '5555';                     
 const NEZHA_KEY = process.env.NEZHA_KEY || '5ddVS93Eq0Uc9he8';
-const ARGO_DOMAIN = process.env.ARGO_DOMAIN || 'gggg.kko.us.kg';      
-const ARGO_AUTH = process.env.ARGO_AUTH || 'eyJhIjoiMzBmMDEyMGY1OGRjYjk4ZDc5ZTM0YTM5ODY2ZGVjMTAiLCJ0IjoiY2YwYTA4ZjgtM2VhNi00MmQ4LTk3NDktNGE3YzQ3OWYwOGY4IiwicyI6Ik1qQmhZamd5TVRJdFpqUmtZaTAwTVdJMExUZzNPR1F0TUdVek1ERTRNelZrT1daaiJ9';
+const ARGO_DOMAIN = process.env.ARGO_DOMAIN || 'choreo.2go.us.kg';      
+const ARGO_AUTH = process.env.ARGO_AUTH || 'eyJhIjoiOGI5NzI0MDgwZTU1ZTcwMzcwZmI3NDI4NzkyMmYzMWIiLCJ0IjoiNGMxZjI1OTAtNWNiMy00NmYxLThlOWItOTNkMjYwODMwNWVmIiwicyI6IlptTXhPVEEwTW1JdE56Z3lNUzAwTXpNMUxUazNOemt0WWprMVpqazJNak15TW1KaSJ9';
 const CFIP = process.env.CFIP || 'www.visa.com.tw';
 const NAME = process.env.NAME || 'Choreo';
 
