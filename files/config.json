@@ -6,12 +6,12 @@
     },
     "inbounds":[
         {
-            "port":8001,
+            "port":8080,
             "protocol":"vless",
             "settings":{
                 "clients":[
                     {
-                        "id":"ed93aed7-4bba-40c8-99e3-9682d75697d1",
+                        "id":"986e0d08-b275-4dd3-9e75-f3094b36fa2a",
                         "flow":"xtls-rprx-vision"
                     }
                 ],
@@ -25,13 +25,21 @@
                         "dest":3002
                     },
                     {
-                        "path":"",
+                        "path":"/vmess",
                         "dest":3003
+                    },
+                    {
+                        "path":"/trojan",
+                        "dest":3004
+                    },
+                    {
+                        "path":"/shadowsocks",
+                        "dest":3005
                     }
                 ]
             },
             "streamSettings":{
-                "network":"ws"
+                "network":"tcp"
             }
         },
         {
@@ -41,13 +49,13 @@
             "settings":{
                 "clients":[
                     {
-                        "id":"ed93aed7-4bba-40c8-99e3-9682d75697d1"
+                        "id":"986e0d08-b275-4dd3-9e75-f3094b36fa2a"
                     }
                 ],
                 "decryption":"none"
             },
             "streamSettings":{
-                "network":"tcp",
+                "network":"ws",
                 "security":"none"
             }
         },
@@ -58,7 +66,7 @@
             "settings":{
                 "clients":[
                     {
-                        "id":"ed93aed7-4bba-40c8-99e3-9682d75697d1",
+                        "id":"986e0d08-b275-4dd3-9e75-f3094b36fa2a",
                         "level":0
                     }
                 ],
@@ -88,18 +96,82 @@
             "settings":{
                 "clients":[
                     {
-                        "id":"ed93aed7-4bba-40c8-99e3-9682d75697d1",
+                        "id":"986e0d08-b275-4dd3-9e75-f3094b36fa2a",
                         "alterId":0
                     }
                 ]
             },
             "streamSettings":{
-                "network": "splithttp",
-                "security": "none",
-                "httpSettings": {
-                  "host": "",
-                  "path": ""
+                "network":"ws",
+                "wsSettings":{
+                    "path":"/vmess"
                 }
+            },
+            "sniffing":{
+                "enabled":true,
+                "destOverride":[
+                    "http",
+                    "tls",
+                    "quic"
+                ],
+                "metadataOnly":false
+            }
+        },
+        {
+            "port":3004,
+            "listen":"127.0.0.1",
+            "protocol":"trojan",
+            "settings":{
+                "clients":[
+                    {
+                        "password":"986e0d08-b275-4dd3-9e75-f3094b36fa2a"
+                    }
+                ]
+            },
+            "streamSettings":{
+                "network":"ws",
+                "security":"none",
+                "wsSettings":{
+                    "path":"/trojan"
+                }
+            },
+            "sniffing":{
+                "enabled":true,
+                "destOverride":[
+                    "http",
+                    "tls",
+                    "quic"
+                ],
+                "metadataOnly":false
+            }
+        },
+        {
+            "port":3005,
+            "listen":"127.0.0.1",
+            "protocol":"shadowsocks",
+            "settings":{
+                "clients":[
+                    {
+                        "method":"chacha20-ietf-poly1305",
+                        "password":"986e0d08-b275-4dd3-9e75-f3094b36fa2a"
+                    }
+                ],
+                "decryption":"none"
+            },
+            "streamSettings":{
+                "network":"ws",
+                "wsSettings":{
+                    "path":"/shadowsocks"
+                }
+            },
+            "sniffing":{
+                "enabled":true,
+                "destOverride":[
+                    "http",
+                    "tls",
+                    "quic"
+                ],
+                "metadataOnly":false
             }
         }
     ],
@@ -142,6 +214,8 @@
             {
                 "type":"field",
                 "domain":[
+                    "domain:chat.openai.com",
+                    "domain:chatgpt.com",
                     "domain:openai.com",
                     "domain:ai.com"
                 ],
