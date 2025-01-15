@@ -10,7 +10,7 @@ const ARGO_DOMAIN = process.env.ARGO_DOMAIN || 'choreo.2go.us.kg';
 const ARGO_AUTH = process.env.ARGO_AUTH || 'eyJhIjoiOGI5NzI0MDgwZTU1ZTcwMzcwZmI3NDI4NzkyMmYzMWIiLCJ0IjoiNGMxZjI1OTAtNWNiMy00NmYxLThlOWItOTNkMjYwODMwNWVmIiwicyI6IlptTXhPVEEwTW1JdE56Z3lNUzAwTXpNMUxUazNOemt0WWprMVpqazJNak15TW1KaSJ9';
 const CFIP = process.env.CFIP || 'www.visa.com.tw';
 const NAME = process.env.NAME || 'Choreo';
-
+                                            
 // root route
 app.get("/", function(req, res) {
   res.send("Hello world!");
