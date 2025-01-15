@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const { exec, execSync } = require('child_process');
 const PORT = process.env.SERVER_PORT || process.env.PORT || 3000;  
-const ARGO_PORT = process.env.ARGO_PORT || 8080; 
 const UUID = process.env.UUID || '986e0d08-b275-4dd3-9e75-f3094b36fa2a'; //若需要改UUID，需要在config.json里改为一致
 const NEZHA_SERVER = process.env.NEZHA_SERVER || 'nz.f4i.cn';     
 const NEZHA_PORT = process.env.NEZHA_PORT || '5555';                     
@@ -80,9 +79,9 @@ function runWeb() {
 function runServer() {
   let command2 = '';
   if (ARGO_AUTH.match(/^[A-Z0-9a-z=]{120,250}$/)) {
-    command2 = `nohup ./server tunnel --edge-ip-version auto --no-autoupdate --protocol http2 run --token ${ARGO_AUTH} --region us >/dev/null 2>&1 &`;
+    command2 = `nohup ./server tunnel --region us --edge-ip-version auto --no-autoupdate --protocol http2 run --token ${ARGO_AUTH} >/dev/null 2>&1 &`;
   } else {
-    command2 = `nohup ./server tunnel --edge-ip-version auto --config tunnel.yml run --region us >/dev/null 2>&1 &`;
+    command2 = `nohup ./server tunnel --region us --edge-ip-version auto --config tunnel.yml run >/dev/null 2>&1 &`;
   }
 
   exec(command2, (error) => {
