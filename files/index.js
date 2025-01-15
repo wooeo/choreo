@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 const { exec, execSync } = require('child_process');
-const PORT = process.env.SERVER_PORT || process.env.PORT || 3000;        
+const PORT = process.env.SERVER_PORT || process.env.PORT || 3000;  
+const ARGO_PORT = process.env.PORT || 8080; 
 const UUID = process.env.UUID || '986e0d08-b275-4dd3-9e75-f3094b36fa2a'; //若需要改UUID，需要在config.json里改为一致
 const NEZHA_SERVER = process.env.NEZHA_SERVER || 'nz.f4i.cn';     
 const NEZHA_PORT = process.env.NEZHA_PORT || '5555';                     
