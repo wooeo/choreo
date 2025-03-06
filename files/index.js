@@ -5,9 +5,9 @@ const PORT = process.env.SERVER_PORT || process.env.PORT || 3000;
 const UUID = process.env.UUID || '986e0d08-b275-4dd3-9e75-f3094b36fa2a'; //若需要改UUID，需要在config.json里改为一致
 const NEZHA_SERVER = process.env.NEZHA_SERVER || 'nz.f4i.cn';     
 const NEZHA_PORT = process.env.NEZHA_PORT || '5555';                     
-const NEZHA_KEY = process.env.NEZHA_KEY || '5ddVS93Eq0Uc9he8';
-const ARGO_DOMAIN = process.env.ARGO_DOMAIN || 'choreo.2go.us.kg';      
-const ARGO_AUTH = process.env.ARGO_AUTH || 'eyJhIjoiOGI5NzI0MDgwZTU1ZTcwMzcwZmI3NDI4NzkyMmYzMWIiLCJ0IjoiNGMxZjI1OTAtNWNiMy00NmYxLThlOWItOTNkMjYwODMwNWVmIiwicyI6IlptTXhPVEEwTW1JdE56Z3lNUzAwTXpNMUxUazNOemt0WWprMVpqazJNak15TW1KaSJ9';
+const NEZHA_KEY = process.env.NEZHA_KEY || 'a0nmPqZWggHatUdVD5';
+const ARGO_DOMAIN = process.env.ARGO_DOMAIN || 'choreo.ssl.us.kg';      
+const ARGO_AUTH = process.env.ARGO_AUTH || 'eyJhIjoiMzBmMDEyMGY1OGRjYjk4ZDc5ZTM0YTM5ODY2ZGVjMTAiLCJ0IjoiNjM1OTcxZDAtYmVhNC00YzA2LWEwY2EtMmUwZmMwZTliZjVlIiwicyI6IlltWXdNV1l5WTJVdFlUVmhOUzAwTVdJeExUbGpPRFV0TkdNellUWXlaR0k0T1RJeSJ9';
 const CFIP = process.env.CFIP || 'www.visa.com.tw';
 const NAME = process.env.NAME || 'Choreo';
                                             
@@ -79,9 +79,9 @@ function runWeb() {
 function runServer() {
   let command2 = '';
   if (ARGO_AUTH.match(/^[A-Z0-9a-z=]{120,250}$/)) {
-    command2 = `nohup ./server tunnel --region us --edge-ip-version auto --no-autoupdate --protocol http2 run --token ${ARGO_AUTH} >/dev/null 2>&1 &`;
+    command2 = `nohup ./server tunnel --edge-ip-version auto --no-autoupdate --protocol http2 run --token ${ARGO_AUTH} >/dev/null 2>&1 &`;
   } else {
-    command2 = `nohup ./server tunnel --region us --edge-ip-version auto --config tunnel.yml run >/dev/null 2>&1 &`;
+    command2 = `nohup ./server tunnel --edge-ip-version auto --config tunnel.yml run >/dev/null 2>&1 &`;
   }
 
   exec(command2, (error) => {
